@@ -1,0 +1,33 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Todos os arquivos
+[*]
+indent_style = space
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Arquivos C#
+[*.cs]
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity
+dotnet_style_object_initializer = true
+dotnet_style_collection_initializer = true
+dotnet_style_coalesce_expression = true
+dotnet_style_null_propagation = true
+dotnet_style_explicit_tuple_names = true
+
+# Arquivos XAML
+[*.xaml]
+indent_size = 2
+
+# Arquivos de configuração
+[*.json,*.xml,*.config]
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false

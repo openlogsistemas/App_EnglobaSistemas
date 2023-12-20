@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Views.ColetaDetalheView"
+             xmlns:componentes="clr-namespace:App.Views.Componentes"
+             xmlns:viewModels="clr-namespace:App.ViewModels"
+             x:DataType="viewModels:ColetaDetalheViewModel"
+             Title="ColetaDetalheView">
+    <StackLayout>
+        <componentes:TopoPrincipal Titulo="Ordem de coleta"
+                                   ExibirVoltar="True" />
+        <ActivityIndicator IsRunning="{Binding EstaCarregando}"
+                           IsVisible="{Binding EstaCarregando}"
+                           Margin="10" />
+        <StackLayout Padding="20,20"
+                     IsVisible="{Binding NaoEstaCarregando}"
+                     Spacing="20">
+            <Frame Style="{DynamicResource BoxColeta}"
+                   Padding="20">
+                <StackLayout Spacing="5">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Ordem de coleta: "
+                                      FontFamily="SemiBold" />
+                                <Span Text="{Binding Ordem, Mode=TwoWay}"
+                                      FontFamily="SemiBold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Nome: "
+                                      FontFamily="SemiBold" />
+                                <Span Text="{Binding Nome}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label LineBreakMode="WordWrap">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Endereco: "
+                                      FontFamily="SemiBold" />
+                                <Span Text="{Binding Endereco}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Remetente: "
+                                      FontFamily="SemiBold" />
+                                <Span Text="{Binding Remetente}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label TextColor="{StaticResource Danger}"
+                           IsVisible="false">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Instrução: "
+                                      FontFamily="SemiBold" />
+                                <Span Text="Entregar após as 11horas." />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Button Style="{DynamicResource BtnSuccess}"
+                    Text="Aceitar coleta"
+                    Command="{Binding AceitarCommand}"
+                    IsVisible="{Binding EstaPendente}" />
+            <Button Style="{DynamicResource BtnDanger}"
+                    Text="Recusar coleta"
+                    Command="{Binding RecusarCommand}"
+                    IsVisible="{Binding EstaPendente}" />
+            <Button Text="Ler pedidos"
+                    Command="{Binding LerPedidosCommand}"
+                    IsVisible="{Binding EstaAceito}" />
+            <Button Text="Ler com packing list"
+                    Command="{Binding LerPackingCommand}"
+                    IsVisible="{Binding EstaAceito}" />
+            <Button Text="Insucesso"
+                    Command="{Binding InsucessoCommand}"
+                    IsVisible="{Binding EstaAceito}" />
+            <Button Text="Abrir no mapa"
+                    Command="{Binding MapaCommand}"
+                    IsVisible="{Binding EstaAceito}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

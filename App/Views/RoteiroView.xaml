@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:componentes="clr-namespace:App.Views.Componentes"
+             x:Class="App.Views.RoteiroView"
+             Title="RoteiroView">
+    <StackLayout>
+        <componentes:TopoPrincipal Titulo="Roteiro de coletas" ExibirVoltar="True" />
+
+        <WebView Source="https://maps.google.com/?q=YourLocation"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+        />
+
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:componentes="clr-namespace:App.Views.Componentes"
+             xmlns:viewModels="clr-namespace:App.ViewModels.Componentes"
+             x:DataType="viewModels:RodapeViewModel"
+             xmlns:helper="clr-namespace:App.Helpers"
+             x:Class="App.Views.Componentes.Rodape">
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 Spacing="0">
+        <StackLayout HeightRequest="5">
+            <componentes:Sombra Rotation="180"
+                                HeightRequest="3"
+                                Opacity="0.4" />
+        </StackLayout>
+        <FlexLayout AlignItems="Center"
+                    AlignContent="SpaceBetween"
+                    HeightRequest="60"
+                    Margin="20, 10">
+            <Image Source="logo"
+                   WidthRequest="100" />
+            <StackLayout FlexLayout.Grow="1"
+                         FlexLayout.Shrink="1">
+                <Label Text="{Static helper:IconFont.Map}"
+                       Style="{DynamicResource IconBtnPerfil}" />
+                <Label Text="Otimizar roteiro"
+                       Style="{DynamicResource InfoBtnPerfil}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OtimizarRoteiro}" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="{Static helper:IconFont.MapMarkerAlt}"
+                       Style="{DynamicResource IconBtnPerfil}" />
+                <Label Text="Abrir no mapa"
+                       Style="{DynamicResource InfoBtnPerfil}" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AbrirMapaCommand}" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </FlexLayout>
+    </StackLayout>
+</ContentView>

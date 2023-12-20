@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Views.CodigoSenhaView"
+             xmlns:viewModels="clr-namespace:App.ViewModels"
+             x:DataType="viewModels:CodigoSenhaViewModel"
+             xmlns:componentes="clr-namespace:App.Views.Componentes"
+             Title="CodigoSenhaView">
+    <StackLayout>
+        <FlexLayout Direction="Column"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    JustifyContent="SpaceEvenly">
+            <Image Source="logo"
+                   WidthRequest="180"
+                   FlexLayout.AlignSelf="Center" />
+            <StackLayout Padding="20"
+                         Spacing="20">
+                <Label Text="Informe o código que você recebeu no email e sua senha nova senha"
+                       FontSize="22"
+                       FontFamily="SemiBold" />
+                <Frame Style="{DynamicResource FormControl}">
+                    <StackLayout Spacing="5">
+                        <Label Text="Código" />
+                        <FlexLayout AlignItems="Center">
+                            <componentes:Input Placeholder="Digite o Código"
+                                               FlexLayout.Grow="1"
+                                               Text="{Binding Codigo}" />
+                        </FlexLayout>
+                    </StackLayout>
+                </Frame>
+                <Label Text="{Binding ErroCodigo}"
+                       IsVisible="{Binding ExibirErroCodigo}"
+                       Style="{DynamicResource ErrorMensagem}" />
+                <Frame Style="{DynamicResource FormControl}">
+                    <StackLayout Spacing="5">
+                        <Label Text="Senha" />
+                        <FlexLayout AlignItems="Center">
+                            <componentes:Input Placeholder="Digite sua senha"
+                                               FlexLayout.Grow="1"
+                                               IsPassword="{Binding ExibirSenha}"
+                                               Text="{Binding Senha}" />
+                            <Button Text="{Binding Icone}"
+                                    Style="{DynamicResource BtnIcon}"
+                                    Command="{Binding VisualizarSenhaCommand}" />
+                        </FlexLayout>
+                    </StackLayout>
+                </Frame>
+                <Label Text="{Binding ErroSenha}"
+                       IsVisible="{Binding ExibirErroSenha}"
+                       Style="{DynamicResource ErrorMensagem}" />
+                <Frame Style="{DynamicResource FormControl}">
+                    <StackLayout Spacing="5">
+                        <Label Text="Confirme sua senha" />
+                        <FlexLayout AlignItems="Center">
+                            <componentes:Input Placeholder="Confirme sua senha"
+                                               FlexLayout.Grow="1"
+                                               IsPassword="{Binding ExibirSenha}"
+                                               Text="{Binding ConfirmacaoSenha}" />
+                            <Button Text="{Binding Icone}"
+                                    Style="{DynamicResource BtnIcon}"
+                                    Command="{Binding VisualizarSenhaCommand}" />
+                        </FlexLayout>
+                    </StackLayout>
+                </Frame>
+                <Label Text="{Binding ErroConfirmacaoSenha}"
+                       IsVisible="{Binding ExibirErroConfirmacaoSenha}"
+                       Style="{DynamicResource ErrorMensagem}" />
+                <Button Text="Enviar"
+                        Command="{Binding EnviarCommand}"
+                        IsVisible="{Binding NaoEstaCarregando}" />
+                <ActivityIndicator IsRunning="{Binding EstaCarregando}"
+                                   IsVisible="{Binding EstaCarregando}" />
+                <Button Text="Voltar"
+                        Style="{DynamicResource BtnTransparent}"
+                        Margin="0,20,0,0"
+                        Command="{Binding VoltarCommand}" />
+            </StackLayout>
+            <Label Text="Versão: 1.0.0"
+                   FlexLayout.AlignSelf="Center"
+                   FontFamily="Bold"
+                   FontSize="12" />
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

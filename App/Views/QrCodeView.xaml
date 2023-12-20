@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:helper="clr-namespace:App.Helpers"
+             xmlns:viewModels="clr-namespace:App.ViewModels"
+            x:DataType="viewModels:QrCodeViewModel"
+            x:Class="App.Views.QrCodeView">
+    <AbsoluteLayout>
+        <zxing:CameraBarcodeReaderView
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="cameraBarcodeReaderView"
+            BarcodesDetected="cameraBarcodeReaderView_BarcodesDetected" />
+
+        <Button
+            Style="{DynamicResource BtnIcon}"
+            Text="{Static helper:IconFont.ChevronLeft}"
+            FontSize="Large"
+            TextColor="White"
+            BackgroundColor="#33000000"
+            HeightRequest="50"
+            WidthRequest="50"
+            CornerRadius="30"
+            AbsoluteLayout.LayoutBounds="10, 10, AutoSize, AutoSize"
+            Command="{Binding VoltarCommand}"
+            />
+    </AbsoluteLayout>
+</ContentPage>
+

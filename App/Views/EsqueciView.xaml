@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Views.EsqueciView"
+             xmlns:componentes="clr-namespace:App.Views.Componentes"
+             xmlns:viewModels="clr-namespace:App.ViewModels"
+             x:DataType="viewModels:EsqueciViewModel"
+             Title="EsqueciView">
+    <StackLayout>
+        <FlexLayout Direction="Column"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    JustifyContent="SpaceEvenly">
+            <Image Source="logo"
+                   WidthRequest="180"
+                   FlexLayout.AlignSelf="Center" />
+            <StackLayout Padding="20"
+                         Spacing="20">
+                <Label Text="Digite seu e-mail"
+                       FontSize="22"
+                       FontFamily="SemiBold" />
+                <Frame Style="{DynamicResource FormControl}">
+                    <StackLayout Spacing="5">
+                        <Label Text="E-mail" />
+                        <FlexLayout AlignItems="Center">
+                            <componentes:Input Placeholder="Digite seu e-mail"
+                                               FlexLayout.Grow="1"
+                                               Text="{Binding Email}" />
+                        </FlexLayout>
+                    </StackLayout>
+                </Frame>
+                <Label Text="{Binding ErroEmail}"
+                       IsVisible="{Binding ExibirErroEmail}"
+                       Style="{DynamicResource ErrorMensagem}" />
+                <Button Text="Enviar"
+                        Command="{Binding EnviarCommand}"
+                        IsVisible="{Binding NaoEstaCarregando}" />
+                <ActivityIndicator IsRunning="{Binding EstaCarregando}"
+                                   IsVisible="{Binding EstaCarregando}" />
+                <Button Text="Voltar"
+                        Style="{DynamicResource BtnTransparent}"
+                        Margin="0,20,0,0"
+                        Command="{Binding VoltarCommand}" />
+            </StackLayout>
+            <Label Text="Versão: 1.0.0"
+                   FlexLayout.AlignSelf="Center"
+                   FontFamily="Bold"
+                   FontSize="12" />
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

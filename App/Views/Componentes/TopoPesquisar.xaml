@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:componentes="clr-namespace:App.Views.Componentes"
+             xmlns:viewModels="clr-namespace:App.ViewModels.Componentes"
+             x:DataType="viewModels:TopoPesquisarViewModel"
+             xmlns:helper="clr-namespace:App.Helpers"
+             x:Class="App.Views.Componentes.TopoPesquisar">
+    <StackLayout Spacing="0">
+        <Frame Style="{DynamicResource Topo}">
+            <FlexLayout AlignItems="Center"  >
+                <Button Style="{DynamicResource BtnVoltar}" Margin="0,0,10,0" Command="{Binding VoltarCommand}" />
+                <Label Text="{Binding Titulo}" FlexLayout.Grow="1" FlexLayout.Shrink="1" FontFamily="SemiBold" FontSize="16" />
+                <StackLayout>
+                    <Label Text="{Static helper:IconFont.Search}" Style="{DynamicResource IconBtnPerfil}" FontSize="22" />
+                    <Label Text="Pesquisar" Style="{DynamicResource InfoBtnPerfil}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Pesquisar_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <Label
+                    Text="{Binding TextoAcao}"
+                    IsVisible="{Binding ExibirAcao}"
+                    WidthRequest="80"
+                    Margin="5,0,0,0"
+                    LineBreakMode="WordWrap"
+                    HeightRequest="50"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    FontSize="12"
+                    FontFamily="SemiBold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Acao_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </FlexLayout>
+        </Frame>
+    
+        <componentes:Sombra HeightRequest="3" />
+    </StackLayout>
+</ContentView>
+

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="App.Views.InicialView"
+            xmlns:componentes="clr-namespace:App.Views.Componentes"
+            xmlns:viewModels="clr-namespace:App.ViewModels"
+            x:DataType="viewModels:InicialViewModel"
+            x:Name="pagina">
+    <FlyoutPage.Flyout>
+        <ContentPage Title="Menu">
+            <VerticalStackLayout HorizontalOptions="CenterAndExpand">
+                <Image Source="logo"
+                       HeightRequest="35"
+                       Margin="0,55,0,0" />
+                <Frame HeightRequest="117"
+                       WidthRequest="117"
+                       CornerRadius="55"
+                       Padding="0"
+                       IsClippedToBounds="True"
+                       BorderColor="#CBCBCB"
+                       Margin="0,40,0,0">
+                    <Image Source="user" />
+                </Frame>
+                <Label Text="{Binding Nome}"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,10,0,0"
+                       TextColor="#757575"
+                       FontSize="16"
+                       FontFamily="SemiBold" />
+                <FlexLayout Margin="20, 30">
+                    <Button Text="Perfil"
+                            FlexLayout.Grow="1"
+                            FlexLayout.Shrink="1"
+                            CornerRadius="0"
+                            Command="{Binding IrParaPerfilCommand}" />
+                    <Button Text="Sair"
+                            FlexLayout.Grow="1"
+                            FlexLayout.Shrink="1"
+                            Style="{DynamicResource BtnSecondary}"
+                            Margin="5,0,0,0"
+                            CornerRadius="0"
+                            Command="{Binding SairCommand}" />
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ContentPage>
+    </FlyoutPage.Flyout>
+    <FlyoutPage.Detail>
+        <ContentPage Title="Detail">
+            <VerticalStackLayout>
+                <componentes:TopoPrincipal Titulo="Página Inicial"
+                                           CommandMenuExecuted="TopoPrincipal_CommandMenuExecuted" />
+                <StackLayout Padding="20, 20"
+                             Spacing="15">
+                    <Button Text="Coletas"
+                            Command="{Binding IrParaColetasCommand}" />
+                    <Button Text="Receber na transportadora" />
+                    <Button Text="Colocar em rota" />
+                    <Button Text="Baixar pedidos" />
+                    <Button Text="Consultas" />
+                    <Button Text="Sair"
+                            Command="{Binding SairCommand}" />
+                </StackLayout>
+            </VerticalStackLayout>
+        </ContentPage>
+    </FlyoutPage.Detail>
+</FlyoutPage>
