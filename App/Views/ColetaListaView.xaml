@@ -26,9 +26,11 @@
                     <StackLayout Spacing="5">
                         <Label Text="Pesquisar" />
                         <FlexLayout AlignItems="Center">
-                            <componentes:Input Placeholder=""
+                            <componentes:Input Text="{Binding PesquisarTexto}"
+                                               TextoAlteradoCommand="{Binding PesquisarCommand}"
                                                FlexLayout.Grow="1" />
                             <Button Text="{Static helper:IconFont.Search}"
+                                    Command="{Binding PesquisarCliqueCommand}"
                                     Style="{DynamicResource BtnIcon}" />
                         </FlexLayout>
                     </StackLayout>
@@ -153,7 +155,7 @@
                                                 <FormattedString>
                                                     <Span Text="Distância: "
                                                           FontFamily="SemiBold" />
-                                                    <Span Text="{Binding DistanciaKm}" />
+                                                    <Span Text="{Binding DistanciaKm, StringFormat='{0:F2}'}" />
                                                     <Span Text=" km" />
                                                 </FormattedString>
                                             </Label.FormattedText>

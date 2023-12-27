@@ -11,7 +11,11 @@ public partial class QrCodeView : ContentPage
         BindingContext = viewModel;
     }
 
-    void cameraBarcodeReaderView_BarcodesDetected(System.Object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
+    void cameraBarcodeReaderView_BarcodesDetected(
+        System.Object sender,
+        ZXing.Net.Maui.BarcodeDetectionEventArgs e
+    )
     {
+        var a = sender;
     }
 }

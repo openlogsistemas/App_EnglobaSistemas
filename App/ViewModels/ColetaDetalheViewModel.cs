@@ -69,9 +69,11 @@ public partial class ColetaDetalheViewModel : BaseViewModel
 				await _coletaService.AceitarColetas([Ordem ?? ""]);
 
 				await Toast.Make("Coleta aceita com sucesso", ToastDuration.Long).Show();
+
 				App.Param = true;
 
-				await _navigationService.Pop();
+				Status = ColetaStatusEnum.Aceito;
+
 			}
 			catch (Exception ex)
 			{
@@ -140,12 +142,10 @@ public partial class ColetaDetalheViewModel : BaseViewModel
 		switch (acao)
 		{
 			case "Waze":
-				await OpenWaze("Rua Doutor Samuel Porto, 258 - Apto 13, Saúde, São Paulo, SP");
+				await OpenWaze(Endereco ?? "");
 				break;
 			case "Google Maps":
-				await OpenGoogleMaps(
-					"Rua Doutor Samuel Porto, 258 - Apto 13, Saúde, São Paulo, SP"
-				);
+				await OpenGoogleMaps(Endereco ?? "");
 				break;
 		}
 	}
