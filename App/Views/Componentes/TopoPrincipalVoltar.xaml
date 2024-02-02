@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:App.ViewModels.Componentes"
+             x:DataType="viewModels:TopoPrincipalVoltarViewModel"
+             xmlns:componentes="clr-namespace:App.Views.Componentes"
+             x:Class="App.Views.Componentes.TopoPrincipalVoltar">
+    <StackLayout Spacing="0">
+        <Frame Style="{DynamicResource Topo}">
+            <FlexLayout AlignItems="Center">
+                <Button Style="{DynamicResource BtnVoltar}"
+                        Margin="0,0,10,0"
+                        Command="{Binding VoltarCommand}" />
+                <Label Text="{Binding Titulo}"
+                       FlexLayout.Grow="1"
+                       FlexLayout.Shrink="1"
+                       FontFamily="SemiBold"
+                       FontSize="16" />
+                <Image Source="logo"
+                       WidthRequest="90" />
+            </FlexLayout>
+        </Frame>
+        <componentes:Sombra HeightRequest="3" />
+    </StackLayout>
+</ContentView>

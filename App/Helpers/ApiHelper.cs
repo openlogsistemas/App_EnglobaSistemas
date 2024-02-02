@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using App.Models;
@@ -123,6 +124,40 @@ public class ApiHelper
         else
         {
             throw new Exception(data);
+        }
+    }
+
+    public async Task<T?> PostImageBase64<T>(
+        string url,
+        string base64Image,
+        string fileName = "imagem.jpg"
+    )
+    {
+        HttpClient client = new() { BaseAddress = new Uri(Url) };
+
+        if (authService.EstaLogado())
+        {
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {authService.Token}");
+        }
+
+        byte[] fileBytes = Convert.FromBase64String(base64Image);
+
+        using var content = new MultipartFormDataContent();
+        var fileContent = new ByteArrayContent(fileBytes);
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+        content.Add(fileContent, "arquivo", fileName);
+
+        var response = await client.PostAsync(url, content);
+        var data = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+            return JsonConvert.DeserializeObject<T>(data);
+        }
+        else
+        {
+            var mensagem = JsonConvert.DeserializeObject<ErrorResponseModel>(data)?.Message ?? data;
+            throw new Exception(mensagem);
         }
     }
 }

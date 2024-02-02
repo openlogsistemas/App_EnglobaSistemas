@@ -1,57 +1,105 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.Views.PerfilView"
              xmlns:componentes="clr-namespace:App.Views.Componentes"
              xmlns:viewModels="clr-namespace:App.ViewModels"
-            x:DataType="viewModels:PerfilViewModel"
+             x:DataType="viewModels:PerfilViewModel"
              xmlns:helper="clr-namespace:App.Helpers"
              Title="PerfilView">
-  
-
-     <VerticalStackLayout>
-        <componentes:TopoPrincipal Titulo="Perfil" ExibirVoltar="True" />
-
-        <StackLayout BackgroundColor="#F4F4F4" Padding="20,30" >
-            <Frame HeightRequest="166" WidthRequest="166" CornerRadius="88" Padding="0" IsClippedToBounds="True" BorderColor="#CBCBCB">
-                <Image Source="user" />
+    <VerticalStackLayout>
+        <componentes:TopoPrincipalVoltar Titulo="Perfil" />
+        <StackLayout BackgroundColor="#F4F4F4"
+                     Padding="20,30">
+            <Frame HeightRequest="166"
+                   WidthRequest="166"
+                   CornerRadius="88"
+                   Padding="0"
+                   IsClippedToBounds="True"
+                   BorderColor="#CBCBCB">
+                <Image Source="{Binding Imagem}"
+                       Aspect="AspectFill" />
             </Frame>
-            <FlexLayout HorizontalOptions="FillAndExpand" FlexLayout.AlignSelf="Center" Margin="20,20,20,0">
+            <FlexLayout HorizontalOptions="FillAndExpand"
+                        FlexLayout.AlignSelf="Center"
+                        Margin="20,20,20,0">
                 <StackLayout Margin="0,0,20,0">
-                    <Label Text="{Static helper:IconFont.Camera}" Style="{DynamicResource IconBtnPerfil}" />
-                    <Label Text="Câmera" Style="{DynamicResource InfoBtnPerfil}" />
+                    <Label Text="{Static helper:IconFont.Camera}"
+                           Style="{DynamicResource IconBtnPerfil}" />
+                    <Label Text="Câmera"
+                           Style="{DynamicResource InfoBtnPerfil}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CameraCommand}" />
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
-
                 <StackLayout>
-                    <Label Text="{Static helper:IconFont.Image}" Style="{DynamicResource IconBtnPerfil}" />
-                    <Label Text="Galeria" Style="{DynamicResource InfoBtnPerfil}" />
+                    <Label Text="{Static helper:IconFont.Image}"
+                           Style="{DynamicResource IconBtnPerfil}" />
+                    <Label Text="Galeria"
+                           Style="{DynamicResource InfoBtnPerfil}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GaleriaCommand}" />
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
-
-                <StackLayout FlexLayout.Grow="1" FlexLayout.Shrink="1"></StackLayout>
-
-                <StackLayout >
-                    <Label Text="{Static helper:IconFont.TrashAlt}" Style="{DynamicResource IconBtnPerfil}" />
-                    <Label Text="Excluir" Style="{DynamicResource InfoBtnPerfil}" />
+                <StackLayout FlexLayout.Grow="1"
+                             FlexLayout.Shrink="1" />
+                <StackLayout>
+                    <Label Text="{Static helper:IconFont.TrashAlt}"
+                           Style="{DynamicResource IconBtnPerfil}" />
+                    <Label Text="Excluir"
+                           Style="{DynamicResource InfoBtnPerfil}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ExcluirCommand}" />
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
             </FlexLayout>
         </StackLayout>
-
-         <StackLayout Margin="20,20,20,10" Spacing="5">
-             <Label Text="Nome:" />
-             <componentes:Input Text="João Mendes" FontFamily="SemiBold" FontSize="16" HeightRequest="40" />
-             <BoxView HeightRequest="1"  Color="Black" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
-         </StackLayout>
-
-         <StackLayout Margin="20,10" Spacing="5">
-             <Label Text="Alterar senha:" />
-             <componentes:Input IsPassword="True" />
-             <BoxView HeightRequest="1"  Color="Black" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
-         </StackLayout>
-
-         <StackLayout Margin="20,10" Spacing="5">
-             <Label Text="Confirmar senha:" />
-             <componentes:Input  IsPassword="True" />
-             <BoxView HeightRequest="1"  Color="Black" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
-         </StackLayout>
+        <StackLayout Margin="20,20,20,10"
+                     Spacing="5">
+            <Label Text="Nome:" />
+            <componentes:Input Text="{Binding Nome}"
+                               FontFamily="SemiBold"
+                               FontSize="16"
+                               HeightRequest="40" />
+            <BoxView HeightRequest="1"
+                     Color="Black"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0,0,0,0" />
+        </StackLayout>
+        <StackLayout Margin="20,10"
+                     Spacing="5">
+            <Label Text="Senha atual:" />
+            <componentes:Input IsPassword="True"
+                               Text="{Binding SenhaAtual}" />
+            <BoxView HeightRequest="1"
+                     Color="Black"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0,0,0,0" />
+        </StackLayout>
+        <StackLayout Margin="20,10"
+                     Spacing="5">
+            <Label Text="Alterar senha:" />
+            <componentes:Input IsPassword="True"
+                               Text="{Binding Senha}" />
+            <BoxView HeightRequest="1"
+                     Color="Black"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0,0,0,0" />
+        </StackLayout>
+        <StackLayout Margin="20,10"
+                     Spacing="5">
+            <Label Text="Confirmar senha:" />
+            <componentes:Input IsPassword="True"
+                               Text="{Binding ConfirmarSenha}" />
+            <BoxView HeightRequest="1"
+                     Color="Black"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0,0,0,0" />
+        </StackLayout>
+        <StackLayout Margin="20,30">
+            <Button Text="Salvar"
+                    IsVisible="{Binding NaoEstaCarregando}"
+                    Command="{Binding SalvarCommand}" />
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

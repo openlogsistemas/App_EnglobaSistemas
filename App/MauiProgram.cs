@@ -60,6 +60,7 @@ public static class MauiProgram
 
         //View Models Componentes
         builder.Services.AddTransient<TopoPrincipalViewModel>();
+        builder.Services.AddTransient<TopoPrincipalVoltarViewModel>();
         builder.Services.AddTransient<TopoPesquisarViewModel>();
         builder.Services.AddTransient<RodapeViewModel>();
 
@@ -87,6 +88,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<AuthService>();
         builder.Services.AddSingleton<ColetaService>();
         builder.Services.AddSingleton<LoginService>();
+        builder.Services.AddSingleton<PerfilService>();
 
         _mauiApp = builder.Build();
 

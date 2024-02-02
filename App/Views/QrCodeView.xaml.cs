@@ -1,11 +1,16 @@
-﻿using App.ViewModels;
+﻿using App.Services;
+using App.ViewModels;
 
 namespace App.Views;
 
 public partial class QrCodeView : ContentPage
 {
-    public QrCodeView(QrCodeViewModel viewModel)
+    readonly NavigationService _navigationService;
+
+    public QrCodeView(QrCodeViewModel viewModel, NavigationService navigationService)
     {
+        (_navigationService) = (navigationService);
+
         InitializeComponent();
 
         BindingContext = viewModel;
@@ -16,6 +21,10 @@ public partial class QrCodeView : ContentPage
         ZXing.Net.Maui.BarcodeDetectionEventArgs e
     )
     {
-        var a = sender;
+        if (e.Results.Any())
+        {
+            var viewModel = (QrCodeViewModel)this.BindingContext;
+            viewModel.LerQRCode(e.Results.FirstOrDefault()!.Value);
+        }
     }
 }

@@ -1,56 +1,79 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App.Converters"
+             xmlns:converter="clr-namespace:App.Converters"
              xmlns:componentes="clr-namespace:App.Views.Componentes"
              xmlns:viewModels="clr-namespace:App.ViewModels"
              xmlns:helper="clr-namespace:App.Helpers"
              x:DataType="viewModels:InsucessoViewModel"
+             xmlns:models="clr-namespace:App.Models"
              x:Class="App.Views.InsucessoView"
              Title="InsucessoView">
-    <VerticalStackLayout VerticalOptions="FillAndExpand">
-        <StackLayout VerticalOptions="FillAndExpand" IsVisible="{Binding ExibirFoto}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:OcorrenciaToBoolConverter x:Key="OcorrenciaToBoolConverter" />
+            <converter:Base64ImageConverter x:Key="Base64ImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     IsVisible="{Binding ExibirFoto}">
             <StackLayout VerticalOptions="FillAndExpand">
-                <Image
-                    Source="{Binding Foto, Converter={StaticResource Base64ImageConverter}}"
-                    Aspect="AspectFill"
-                    VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand" />
+                        <Image Source="{Binding Foto, Converter={StaticResource Base64ImageConverter}}" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <StackLayout Padding="20,15" BackgroundColor="#C7C7C7">
-                <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" HeightRequest="45"> 
-                    <Button Text="Repetir" Command="{Binding TirarFotoCommand}" Style="{DynamicResource BtnOutlinePrimary}" />
-                    <Button Text="Salvar" Command="{Binding SalvarCommand}" />
+            <StackLayout Padding="20,15"
+                         BackgroundColor="#C7C7C7">
+                <FlexLayout JustifyContent="SpaceBetween"
+                            AlignItems="Center"
+                            HeightRequest="45">
+                    <Button Text="Repetir"
+                            Command="{Binding TirarFotoCommand}"
+                            Style="{DynamicResource BtnOutlinePrimary}" />
+                    <Button Text="Salvar"
+                            Command="{Binding SalvarCommand}" />
                 </FlexLayout>
             </StackLayout>
         </StackLayout>
-        <StackLayout VerticalOptions="FillAndExpand" IsVisible="{Binding ExibirFormulario}">
-            <componentes:TopoPrincipal Titulo="Insucesso" ExibirVoltar="True" />
-
-            <StackLayout Padding="20" Spacing="20">
+        <StackLayout VerticalOptions="FillAndExpand"
+                     IsVisible="{Binding ExibirFormulario}">
+            <componentes:TopoPrincipalVoltar Titulo="Insucesso" />
+            <StackLayout Padding="20"
+                         Spacing="20">
                 <Frame Style="{DynamicResource FormControl}">
-                    <StackLayout Spacing="5" >
+                    <StackLayout Spacing="5">
                         <Label Text="Observação" />
                         <FlexLayout AlignItems="Center">
-                            <componentes:Input FlexLayout.Grow="1" />
+                            <componentes:Input FlexLayout.Grow="1"
+                                               Text="{Binding Observacao}" />
                         </FlexLayout>
                     </StackLayout>
                 </Frame>
+                <Label Text="{Binding ErroObservacao}"
+                       IsVisible="{Binding ExibirErroObservacao}"
+                       Style="{DynamicResource ErrorMensagem}" />
                 <StackLayout Spacing="3">
-                    <Label Text="Selecione a ocorrência:" FontFamily="SemiBold" />
-                    <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" Color="#888888" />
-                    <StackLayout Spacing="0" Margin="0,10,0,0">
-                        <RadioButton Content="Veículo quebrado" />
-                        <RadioButton Content="Área afetada pela chuva" />
-                        <RadioButton Content="Ausente" />
-                        <RadioButton Content="Destinatário não retirou na unidade dos correios" />
-                        <RadioButton Content="Manifestação de motorista (Estradas interditadas)" />
+                    <Label Text="Selecione a ocorrência:"
+                           FontFamily="SemiBold" />
+                    <BoxView HeightRequest="1"
+                             HorizontalOptions="FillAndExpand"
+                             Color="#888888" />
+                    <StackLayout BindableLayout.ItemsSource="{Binding Ocorrencias}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:OcorrenciaModel">
+                                <componentes:Radio Content="{Binding Descricao}"
+                                                   GroupName="ocorrencias"
+                                                   Value="{Binding .}" />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
                     </StackLayout>
                 </StackLayout>
-                <Button Text="Lançar" Margin="0,20,0,0" Command="{Binding LancarCommand}" />
+                <Button Text="Lançar"
+                        Margin="0,20,0,0"
+                        Command="{Binding LancarCommand}" />
+                <ActivityIndicator IsRunning="{Binding EstaCarregando}"
+                                   IsVisible="{Binding EstaCarregando}" />
             </StackLayout>
-
-
         </StackLayout>
-        
-    </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>

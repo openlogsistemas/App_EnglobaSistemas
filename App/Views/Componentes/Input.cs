@@ -18,7 +18,7 @@ public class Input : Entry
         set => SetValue(TextoAlteradoCommandProperty, value);
     }
 
-    int altura = 35;
+    int altura = 25;
 
     public Input()
     {
@@ -27,7 +27,11 @@ public class Input : Entry
         this.HeightRequest = altura;
 
         this.TextChanged += OnTextChanged!;
+
+        this.TextColor = Colors.Black;
+        this.PlaceholderColor = Colors.Gray;
     }
+
 
     private void OnTextChanged(object sender, TextChangedEventArgs e)
     {
@@ -44,15 +48,25 @@ public class Input : Entry
         {
             // Remove as bordas no Android
             nativeAndroidEntry.Background = null;
+
+            // Remover paddings e margens
+            nativeAndroidEntry.SetPadding(0, 0, 0, 0);
+
+            // Remover a cor do sublinhado no Android versões mais recentes
+            nativeAndroidEntry.BackgroundTintMode = null;
+            nativeAndroidEntry.BackgroundTintList = null;
         }
 #endif
 
 #if IOS || MACCATALYST
-        if (Handler?.PlatformView is UIKit.UITextField nativeIOSEntry)
-        {
-            // Remove as bordas no iOS
+		if (Handler?.PlatformView is UIKit.UITextField nativeIOSEntry)
+		{
+			// Remove as bordas no iOS
             nativeIOSEntry.BorderStyle = UIKit.UITextBorderStyle.None;
-        }
+
+            // Remover paddings e margens
+            nativeIOSEntry.LayoutMargins = new UIKit.UIEdgeInsets(0, 0, 0, 0);
+		}
 #endif
     }
 }

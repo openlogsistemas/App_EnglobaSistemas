@@ -17,10 +17,17 @@ public class DoubleComVirgulaConverter : JsonConverter<double?>
         string s = (string)reader.Value!;
         if (string.IsNullOrEmpty(s))
         {
-            return null;
+            return 0;
         }
 
-        return double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture);
+        try
+        {
+            return double.Parse(s.Replace(',', '.'), CultureInfo.InvariantCulture);
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
     public override void WriteJson(JsonWriter writer, double? value, JsonSerializer serializer)

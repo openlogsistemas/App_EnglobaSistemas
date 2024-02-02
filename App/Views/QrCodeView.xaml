@@ -12,6 +12,9 @@
                                        HorizontalOptions="FillAndExpand"
                                        VerticalOptions="FillAndExpand"
                                        x:Name="cameraBarcodeReaderView"
+                                       Options="{Binding Options}"
+                                       CameraLocation="Rear"
+                                       Margin="3"
                                        BarcodesDetected="cameraBarcodeReaderView_BarcodesDetected" />
         <Button Style="{DynamicResource BtnIcon}"
                 Text="{Static helper:IconFont.ChevronLeft}"

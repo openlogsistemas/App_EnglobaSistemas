@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="br.com.openlog.br.com.openlog.openlogapp" android:versionCode="2" android:versionName="0.0.2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="br.com.openlog.br.com.openlog.openlogapp" android:versionName="0.0.7" android:versionCode="7">
 	<application android:allowBackup="false" android:supportsRtl="true" android:label="Engloba Sistemas" android:icon="@mipmap/fav" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />

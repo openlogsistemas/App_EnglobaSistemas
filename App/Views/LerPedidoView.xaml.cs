@@ -17,4 +17,29 @@ public partial class LerPedidoView : ContentPage
 
         viewModel.Pesquisar();
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        try
+        {
+            string? valor = App.Request["qrcode"]?.ToString();
+
+            if (!string.IsNullOrEmpty(valor))
+            {
+                var viewModel = (LerPedidoViewModel)BindingContext;
+                viewModel.NumeroPedido = valor;
+                _ = viewModel.PesquisarNumeroPedidoAsync();
+            }
+        }
+        catch { }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        App.Request["qrcode"] = "";
+    }
 }

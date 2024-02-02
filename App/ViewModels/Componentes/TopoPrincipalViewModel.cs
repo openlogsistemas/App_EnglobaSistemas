@@ -13,22 +13,10 @@ public partial class TopoPrincipalViewModel : BaseViewModel
     [ObservableProperty]
     private string? titulo;
 
-    [ObservableProperty]
-    private bool exibirVoltar;
-
-    [ObservableProperty]
-    private bool exibirMenu;
-
     public TopoPrincipalViewModel(NavigationService navigationService)
     {
         (_navigationService) = (navigationService);
-
-        ExibirVoltar = false;
-        ExibirMenu = true;
     }
-
-    [RelayCommand]
-    private void Voltar() => _navigationService.Pop();
 
     [ObservableProperty]
     private Command? menu;

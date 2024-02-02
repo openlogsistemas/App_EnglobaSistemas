@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:componentes="clr-namespace:App.Views.Componentes"
                     xmlns:helper="clr-namespace:App.Helpers">
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color"
@@ -149,19 +150,6 @@
                 Value="30" />
         <Setter Property="MinimumWidthRequest"
                 Value="44" />
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor"
-                                    Value="{StaticResource Gray300}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
     </Style>
     <Style TargetType="Frame">
         <Setter Property="HasShadow"
@@ -546,7 +534,7 @@
         <Setter Property="FontFamily"
                 Value="Icon" />
         <Setter Property="FontSize"
-                Value="18" />
+                Value="15" />
         <Setter Property="BackgroundColor"
                 Value="Transparent" />
         <Setter Property="TextColor"
@@ -556,9 +544,13 @@
         <Setter Property="Margin"
                 Value="0" />
         <Setter Property="MinimumHeightRequest"
-                Value="0" />
+                Value="20" />
         <Setter Property="MinimumWidthRequest"
-                Value="0" />
+                Value="15" />
+        <Setter Property="HorizontalOptions"
+                Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand" />
     </Style>
     <Style x:Key="Topo"
            TargetType="Frame">

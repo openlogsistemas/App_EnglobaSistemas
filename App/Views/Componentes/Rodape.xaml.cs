@@ -5,20 +5,8 @@ namespace App.Views.Componentes;
 
 public partial class Rodape : ContentView
 {
-    public static readonly BindableProperty OtimizarRoteiroCommandProperty =
-        BindableProperty.Create(
-            nameof(OtimizarRoteiroCommand),
-            typeof(ICommand),
-            typeof(Rodape),
-            null,
-            propertyChanged: OnOtimizarRoteiroCommand
-        );
-
-    public ICommand OtimizarRoteiroCommand
-    {
-        get => (ICommand)GetValue(OtimizarRoteiroCommandProperty);
-        set => SetValue(OtimizarRoteiroCommandProperty, value);
-    }
+    public delegate void CommandOtimizarRoteiroEventHandler(object sender, EventArgs e);
+    public event CommandOtimizarRoteiroEventHandler? CommandOtimizarRoteiroExecuted;
 
     public Rodape()
     {
@@ -26,14 +14,8 @@ public partial class Rodape : ContentView
         BindingContext = MauiProgram.Services.GetService<RodapeViewModel>();
     }
 
-    private static void OnOtimizarRoteiroCommand(
-        BindableObject bindable,
-        object oldValue,
-        object newValue
-    )
+    void OtimizarRoteiro_Clicked(System.Object sender, System.EventArgs e)
     {
-        var control = (Rodape)bindable;
-        var viewModel = (RodapeViewModel)control.BindingContext;
-        viewModel.OtimizarRoteiro = (Command)newValue;
+        CommandOtimizarRoteiroExecuted?.Invoke(this, EventArgs.Empty);
     }
 }

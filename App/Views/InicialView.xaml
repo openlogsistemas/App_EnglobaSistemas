@@ -19,7 +19,8 @@
                        IsClippedToBounds="True"
                        BorderColor="#CBCBCB"
                        Margin="0,40,0,0">
-                    <Image Source="user" />
+                    <Image Source="{Binding PerfilFoto}"
+                           Aspect="AspectFill" />
                 </Frame>
                 <Label Text="{Binding Nome}"
                        HorizontalTextAlignment="Center"

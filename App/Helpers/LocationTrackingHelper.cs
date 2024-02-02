@@ -21,7 +21,7 @@ public class LocationTrackingService
                     {
                         try
                         {
-                            var location = await Geolocation.GetLastKnownLocationAsync();
+                            var location = await Geolocation.GetLocationAsync();
                             if (location != null)
                             {
                                 authService.Latitude = location.Latitude;

@@ -19,10 +19,10 @@ public class ColetaPendenteModel
     public string? NumeroCliente1 { get; set; }
 
     [JsonProperty("pesoTaxado")]
-    public int PesoTaxado { get; set; }
+    public int? PesoTaxado { get; set; }
 
     [JsonProperty("qtdeVolumes")]
-    public int QtdeVolumes { get; set; }
+    public int? QtdeVolumes { get; set; }
 
     [JsonProperty("situacao")]
     public string? Situacao { get; set; }
@@ -40,7 +40,7 @@ public class ColetaPendenteModel
     public string? BaseDestinoNome { get; set; }
 
     [JsonProperty("dataPrevista")]
-    public DateTime DataPrevista { get; set; }
+    public DateTime? DataPrevista { get; set; }
 
     [JsonProperty("destinatarioNome")]
     public string? DestinatarioNome { get; set; }
@@ -61,7 +61,7 @@ public class ColetaPendenteModel
     public string? DestinatarioCidade { get; set; }
 
     [JsonProperty("destinatarioCEP")]
-    public int DestinatarioCEP { get; set; }
+    public int? DestinatarioCEP { get; set; }
 
     [JsonProperty("destinatarioPontoReferencia")]
     public string? DestinatarioPontoReferencia { get; set; }
@@ -123,7 +123,7 @@ public class ColetaPendenteModel
     public string? RemetenteCidade { get; set; }
 
     [JsonProperty("remetenteCEP")]
-    public int RemetenteCEP { get; set; }
+    public int? RemetenteCEP { get; set; }
 
     [JsonProperty("remetentePontoReferencia")]
     public string? RemetentePontoReferencia { get; set; }
@@ -165,16 +165,18 @@ public class ColetaPendenteModel
     public string? RemetenteCodigoIBGE { get; set; }
 
     [JsonProperty("remetenteLatitude")]
-    public string? RemetenteLatitude { get; set; }
+    [JsonConverter(typeof(DoubleComVirgulaConverter))]
+    public double? RemetenteLatitude { get; set; }
 
     [JsonProperty("remetenteLongitude")]
-    public string? RemetenteLongitude { get; set; }
+    [JsonConverter(typeof(DoubleComVirgulaConverter))]
+    public double? RemetenteLongitude { get; set; }
 
-    public string DestinatarioEnderecoCompleto =>
-        $"{DestinatarioEndereco} - {DestinatarioBairro}, {DestinatarioCidade}, {DestinatarioEstado}, CEP: {DestinatarioCEP}";
+    public string? DestinatarioEnderecoCompleto =>
+        $"{DestinatarioEndereco} - {DestinatarioBairro}, {DestinatarioCidade}, {DestinatarioEstado}, CEP: {DestinatarioCEP}{((string.IsNullOrEmpty(DestinatarioPontoReferencia) ? "" : $" - {DestinatarioPontoReferencia}"))}";
 
-    public string RemetenteEnderecoCompleto =>
-        $"{RemetenteEndereco} - {RemetenteBairro}, {RemetenteCidade}, {RemetenteEstado}, CEP: {RemetenteCEP}";
+    public string? RemetenteEnderecoCompleto =>
+        $"{RemetenteEndereco} - {RemetenteBairro}, {RemetenteCidade}, {RemetenteEstado}, CEP: {RemetenteCEP}{((string.IsNullOrEmpty(RemetentePontoReferencia) ? "" : $" - {RemetentePontoReferencia}"))}";
 
     public ColetaStatusEnum Status =>
         UltimaOcorrencia switch
@@ -193,10 +195,7 @@ public class ColetaPendenteModel
                 return null;
 
             var location1 = new Location(authService.Latitude, authService.Longitude);
-            var location2 = new Location(
-                (double)DestinatarioLatitude!,
-                (double)DestinatarioLongitude!
-            );
+            var location2 = new Location(DestinatarioLatitude!.Value, DestinatarioLongitude!.Value);
 
             return Location.CalculateDistance(location1, location2, DistanceUnits.Kilometers);
         }

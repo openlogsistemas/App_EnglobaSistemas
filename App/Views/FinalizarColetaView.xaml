@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.Views.FinalizarColetaView"
@@ -14,48 +14,71 @@
             <converter:Base64ImageConverter x:Key="Base64ImageConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <StackLayout>
-        <StackLayout IsVisible="{Binding ExibirFoto}" VerticalOptions="FillAndExpand">
+        <StackLayout IsVisible="{Binding ExibirFoto}"
+                     VerticalOptions="FillAndExpand">
             <StackLayout VerticalOptions="FillAndExpand">
-                <Image
-                    Source="{Binding Foto, Converter={StaticResource Base64ImageConverter}}"
-                    Aspect="AspectFill"
-                    VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand" />
+                <Image Source="{Binding Foto, Converter={StaticResource Base64ImageConverter}}"
+                       Aspect="AspectFill"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand" />
             </StackLayout>
-            <StackLayout Padding="20,15" BackgroundColor="#C7C7C7">
-                <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" HeightRequest="45"> 
-                    <Button Text="Repetir" Command="{Binding TirarFotoCommand}" Style="{DynamicResource BtnOutlinePrimary}" />
-                    <Button Text="Salvar" Command="{Binding SalvarFotoCommand}" />
+            <StackLayout Padding="20,15"
+                         BackgroundColor="#C7C7C7">
+                <FlexLayout JustifyContent="SpaceBetween"
+                            AlignItems="Center"
+                            HeightRequest="45">
+                    <Button Text="Repetir"
+                            Command="{Binding TirarFotoCommand}"
+                            Style="{DynamicResource BtnOutlinePrimary}" />
+                    <Button Text="Salvar"
+                            Command="{Binding SalvarFotoCommand}" />
                 </FlexLayout>
             </StackLayout>
-
         </StackLayout>
-
-        <StackLayout IsVisible="{Binding ExibirAssinatura}" VerticalOptions="FillAndExpand" Padding="10">
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#E0E0E0" Padding="20, 10" Spacing="10">
-
-                <FlexLayout AlignItems="Center" HeightRequest="30">
-                    <Button Style="{DynamicResource BtnVoltar}" Margin="0,0,10,0" Command="{Binding VoltarCommand}" />
-                    <Label Text="Assinatura digital" FlexLayout.Grow="1" FlexLayout.Shrink="1" FontFamily="SemiBold" FontSize="16" />
-                    <Button Text="Limpar" Padding="0" Background="Transparent" TextColor="{StaticResource Primary}" Command="{Binding LimparCommand}"/>
+        <StackLayout IsVisible="{Binding ExibirAssinatura}"
+                     VerticalOptions="FillAndExpand"
+                     Padding="10">
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="#E0E0E0"
+                         Padding="20, 10"
+                         Spacing="10">
+                <FlexLayout AlignItems="Center"
+                            HeightRequest="30">
+                    <Button Style="{DynamicResource BtnVoltar}"
+                            Margin="0,0,10,0"
+                            Command="{Binding VoltarCommand}" />
+                    <Label Text="Assinatura digital"
+                           FlexLayout.Grow="1"
+                           FlexLayout.Shrink="1"
+                           FontFamily="SemiBold"
+                           FontSize="16" />
+                    <Button Text="Limpar"
+                            Padding="0"
+                            Background="Transparent"
+                            TextColor="{StaticResource Primary}"
+                            Command="{Binding LimparCommand}" />
                 </FlexLayout>
-
-                <Label Text="*Assine na área destacada em branco." Margin="0,10,0,0" />
-
-                <Frame Padding="5" CornerRadius="0">
-                    <StackLayout Padding="10,0" Spacing="10">
-                        <Label Text="Assinatura:" FontFamily="SemiBold" />
-                        <toolkit:DrawingView Lines="{Binding Assinatura}" LineColor="#464646" LineWidth="3" HeightRequest="130" BackgroundColor="White" />
+                <Label Text="*Assine na área destacada em branco."
+                       Margin="0,10,0,0" />
+                <Frame Padding="5"
+                       CornerRadius="0">
+                    <StackLayout Padding="10,0"
+                                 Spacing="10">
+                        <Label Text="Assinatura:"
+                               FontFamily="SemiBold" />
+                        <toolkit:DrawingView Lines="{Binding Assinatura}"
+                                             IsMultiLineModeEnabled="true"
+                                             LineColor="#464646"
+                                             LineWidth="2"
+                                             HeightRequest="130"
+                                             BackgroundColor="White" />
                     </StackLayout>
                 </Frame>
-
-                <Button Text="Salvar" Command="{Binding SalvarAssinaturaCommand}" />
-
+                <Button Text="Salvar"
+                        Command="{Binding SalvarAssinaturaCommand}" />
             </StackLayout>
-
         </StackLayout>
-
     </StackLayout>
 </ContentPage>

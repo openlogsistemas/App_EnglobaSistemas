@@ -7,8 +7,7 @@
              x:DataType="viewModels:ColetaDetalheViewModel"
              Title="ColetaDetalheView">
     <StackLayout>
-        <componentes:TopoPrincipal Titulo="Ordem de coleta"
-                                   ExibirVoltar="True" />
+        <componentes:TopoPrincipalVoltar Titulo="Ordem de coleta" />
         <ActivityIndicator IsRunning="{Binding EstaCarregando}"
                            IsVisible="{Binding EstaCarregando}"
                            Margin="10" />

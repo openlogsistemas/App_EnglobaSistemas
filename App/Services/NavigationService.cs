@@ -1,24 +1,39 @@
 ﻿using System;
+
 namespace App.Services;
 
 public class NavigationService
 {
-	readonly IServiceProvider _serviceProvider;
+    readonly IServiceProvider _serviceProvider;
 
-    public NavigationService(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
+    public NavigationService(IServiceProvider serviceProvider) =>
+        _serviceProvider = serviceProvider;
 
-    public Task Push<T>() where T : Page
+    public Page RootPage => App.RootPage!;
+    public Page MainPage => App.Current!.MainPage!;
+
+    public Task Push<T>()
+        where T : Page
     {
         var page = _serviceProvider.GetService<T>();
-        return App.Current!.MainPage!.Navigation.PushAsync(page);
+        return MainPage.Navigation.PushAsync(page);
     }
 
-    public Task Pop() => App.Current!.MainPage!.Navigation.PopAsync();
+    public Task PushModal<T>()
+        where T : Page
+    {
+        var page = _serviceProvider.GetService<T>();
+        return MainPage.Navigation.PushModalAsync(page);
+    }
 
-    public void Main<T>() where T : Page
+    public Task Pop() => RootPage.Navigation.PopAsync();
+
+    public Task PopModal() => RootPage.Navigation.PopModalAsync();
+
+    public void Main<T>()
+        where T : Page
     {
         var page = _serviceProvider.GetService<T>();
         App.Current!.MainPage = new NavigationPage(page);
     }
 }
-

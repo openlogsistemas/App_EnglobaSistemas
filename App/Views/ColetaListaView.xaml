@@ -194,6 +194,6 @@
                 </StackLayout>
             </Grid>
         </StackLayout>
-        <componentes:Rodape OtimizarRoteiroCommand="{Binding IrParaDetalheCommand}" />
+        <componentes:Rodape CommandOtimizarRoteiroExecuted="Rodape_CommandOtimizarRoteiroExecuted" />
     </StackLayout>
 </ContentPage>

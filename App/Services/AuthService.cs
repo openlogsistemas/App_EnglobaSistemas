@@ -29,6 +29,12 @@ public class AuthService
         set => Preferences.Set("Nome", value);
     }
 
+    public string Imagem
+    {
+        get => Preferences.Get("Imagem", "");
+        set => Preferences.Set("Imagem", value);
+    }
+
     public string Email
     {
         get => Preferences.Get("Email", "");

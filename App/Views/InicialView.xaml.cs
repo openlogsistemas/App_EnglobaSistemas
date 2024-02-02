@@ -15,4 +15,16 @@ public partial class InicialView : FlyoutPage
     {
         pagina.IsPresented = !pagina.IsPresented;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        try
+        {
+            var viewModel = (InicialViewModel)BindingContext;
+            _ = viewModel.CarregarPerfil();
+        }
+        catch { }
+    }
 }

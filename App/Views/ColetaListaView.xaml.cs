@@ -31,7 +31,7 @@ public partial class ColetaListaView : ContentPage
 
         try
         {
-            bool recarregar = (bool)(App.Param ?? false);
+            bool recarregar = (bool)(App.Request["reload"] ?? false);
             if (recarregar)
             {
                 var viewModel = (ColetaListaViewModel)BindingContext;
@@ -39,5 +39,12 @@ public partial class ColetaListaView : ContentPage
             }
         }
         catch { }
+    }
+
+    void Rodape_CommandOtimizarRoteiroExecuted(System.Object sender, System.EventArgs e)
+    {
+        var viewModel = (ColetaListaViewModel)BindingContext;
+
+        viewModel.OtimizarRoteiroAsync();
     }
 }
